@@ -1,0 +1,1 @@
+{:indents {clojure.core/deftype [[:inner 2]]}}
