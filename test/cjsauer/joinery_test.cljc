@@ -28,9 +28,8 @@
     (is (= {} (empty jm)))
     (is (= {:a 1} (joined-map {:a 1})))
     (is (= (joined-map {:a 1}) {:a 1}))
-    ;; (is (not= db jm))
-    ;; (is (not= jm db))
-    )
+    (is (not= db jm))
+    (is (not= jm db)))
 
   (testing "lookup"
     (let [c  (get-in jm [:person/id 1])
