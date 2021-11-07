@@ -1,0 +1,40 @@
+name: Joinery CI/CD Workflow
+on:
+  push:
+    branches:
+      - main
+defaults:
+  run:
+    shell: bash
+jobs:
+  joinery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Prepare java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '8'
+      - name: Install clojure tools
+        uses: DeLaGuardo/setup-clojure@3.5
+        with:
+          cli: 1.10.3.1020
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install
+      - name: Cache clojure deps
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-joinery
+        with:
+          path: |
+            ~/.m2
+            ~/.gitlibs
+          key: ${{ env.cache-name }}-${{ hashFiles('deps.edn') }}
+      - name: Run clj tests
+        run: clojure -T:build test
+      - name: Run cljs tests
+        run: npx shadow-cljs release :test
