@@ -37,16 +37,18 @@
           v' (table-join joinery root v)]
       (clojure.lang.MapEntry. k v')))
 
+  clojure.lang.Counted
+  (count [_] (.count m))
+
   clojure.lang.IPersistentCollection
-  (count [_]
-    (.count m))
   (cons [_ o]
     (JoinedMap. joinery root (.cons m o)))
   (empty [_]
     (JoinedMap. joinery root (.empty m)))
-  (equiv [_ o]
-    (and (isa? (class o) JoinedMap)
-         (.equiv (.m o) m)))
+  (equiv [this o]
+    (if (isa? (class o) JoinedMap)
+      (.equiv (.m o) m)
+      (.equiv o this)))
 
   clojure.lang.Seqable
   (seq [_]
@@ -93,12 +95,12 @@
     (meta m))
 
   Object
-  (hashCode [_]
-    (clojure.lang.Util/hash m))
+  (hashCode [this]
+    (clojure.lang.Util/hash (into {} this)))
 
-  (equals [_ o]
-    (and (isa? (class o) JoinedMap)
-         (= (.m o) m)))
+  (equals [this o]
+    (or (identical? this o)
+        (.equiv this o)))
 
   (toString [this]
     (str (into {} this)))
