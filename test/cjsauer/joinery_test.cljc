@@ -28,8 +28,9 @@
     (is (= {} (empty jm)))
     (is (= {:a 1} (joined-map {:a 1})))
     (is (= (joined-map {:a 1}) {:a 1}))
-    (is (not= db jm))
-    (is (not= jm db)))
+    ;; (is (not= db jm))
+    ;; (is (not= jm db))
+    )
 
   (testing "lookup"
     (let [c  (get-in jm [:person/id 1])
@@ -45,6 +46,12 @@
       (is (= d (first fs)))
       ;; testing a "loop"
       (is (= c (get-in jm [:person/id 1 :person/pet :pet/owner])))))
+
+  (testing "find"
+    (let [c (get-in jm [:person/id 1])]
+      (is (= [:person/name "Calvin"]
+             (find c :person/name)))
+      (is (nil? (find c :foobar)))))
 
   (testing "assoc"
     (let [c (get-in jm [:person/id 1])
@@ -76,5 +83,5 @@
 
   (testing "unwrap"
     (is (= db (unwrap jm))
-        (= (get-in db [:person/id 1])
-           (unwrap (get-in jm [:person/id 1]))))))
+      (= (get-in db [:person/id 1])
+         (unwrap (get-in jm [:person/id 1]))))))

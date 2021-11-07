@@ -25,3 +25,5 @@
 /checkouts
 /classes
 /target
+node_modules/
+\.shadow-cljs/
