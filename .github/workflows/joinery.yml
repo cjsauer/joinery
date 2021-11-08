@@ -34,7 +34,12 @@ jobs:
             ~/.m2
             ~/.gitlibs
           key: ${{ env.cache-name }}-${{ hashFiles('deps.edn') }}
-      - name: Run clj tests
-        run: clojure -T:build test
       - name: Run cljs tests
         run: npx shadow-cljs release :test
+      - name: Run clj tests and build
+        run: clojure -T:build ci
+      - name: Clojars deploy
+        run: clojure -T:build deploy
+        env:
+          CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
+          CLOJARS_PASSWORD: ${{ secrets.CLOJARS_PASSWORD }}
