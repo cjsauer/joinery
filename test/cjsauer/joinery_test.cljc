@@ -83,4 +83,34 @@
   (testing "unwrap"
     (is (= db (unwrap jm))
       (= (get-in db [:person/id 1])
-         (unwrap (get-in jm [:person/id 1]))))))
+         (unwrap (get-in jm [:person/id 1])))))
+
+  (testing "customize starting entity"
+    (let [c   (get-in jm [:person/id 1])
+          e   {:current/person [:person/id 1]}
+          jm' (joined-map db e)]
+      (is (= c (:current/person jm')))))
+
+  (testing "to string"
+    (is (= (str db) (str jm)))
+    (is (= (str (get-in db [:person/id 1]))
+           (str (get-in jm [:person/id 1]))))
+    (is (= (str [(get-in db [:person/id 2])])
+           (str (get-in jm [:person/id 1 :person/friends])))))
+
+  (testing "hashing"
+    (is (= (hash db) (hash jm)))
+    (is (= (hash (get-in db [:person/id 1]))
+           (hash (get-in jm [:person/id 1]))))
+    (is (= (hash [(get-in db [:person/id 2])])
+           (hash (get-in jm [:person/id 1 :person/friends])))))
+
+  (testing "invoke"
+    (is (= (joined-map (db :person/id))
+           (jm :person/id))))
+
+  (testing "reduce"
+    (is (= (seq jm)
+           (reduce conj [] jm)))
+    (is (= (seq jm)
+           (reduce-kv (fn [r k v] (conj r [k v])) [] jm)))))
