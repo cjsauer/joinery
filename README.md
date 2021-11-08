@@ -5,20 +5,6 @@
 A library to enable traversal of in-memory graph-like data structures using Clojure(Script)
 map protocols.
 
-## Install
-
-Lein/Boot
-
-```
-[net.clojars.cjsauer/joinery "0.1.15"]
-```
-
-deps.edn
-
-```
-net.clojars.cjsauer/joinery {:mvn/version "0.1.15"}
-```
-
 ## Quickstart
 
 ```clojure
