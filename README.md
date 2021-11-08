@@ -97,6 +97,24 @@ how to identify what values should be treated as "links", and, given we've reach
 one of these links, how do we "resolve" it. With these two functions, we can obtain
 a map-like interface to a myriad of different normalized sources.
 
+## Prior Art
+
+`joinery` came about while experimenting with the latest Clojure trend of
+in-memory databases, namely:
+
+- [*Pyramid's](https://github.com/lilactown/pyramid) normalized structure
+- [*Fulcro's](https://github.com/fulcrologic/fulcro) app state
+- [Asami's](https://github.com/threatgrid/asami) `entity` function
+- [DataScript's](https://github.com/tonsky/datascript) `entity` function
+- [Datomic's](https://docs.datomic.com/on-prem/clojure/index.html#datomic.api/entity) `entity` function
+
+While not a database per se, [Pathom3's Smart Map](https://pathom3.wsscode.com/docs/smart-maps)
+is another great source of inspiration. Pathom's scope is more broad in that smart
+map access can trigger arbitrary code to run (even network access), while `joinery`
+is mainly focused on local data structures only.
+
+_* joinery will work out of the box with these libraries_
+
 ## Development
 
 Run the project's tests:
