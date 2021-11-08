@@ -1,5 +1,7 @@
 # joinery
 
+[![Clojars Project](https://img.shields.io/clojars/v/net.clojars.cjsauer/joinery.svg)](https://clojars.org/net.clojars.cjsauer/joinery)
+
 A library to enable traversal of graph-like data sources using Clojure(Script)
 map protocols.
 
