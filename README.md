@@ -2,7 +2,7 @@
 
 [![Clojars Project](https://img.shields.io/clojars/v/net.clojars.cjsauer/joinery.svg)](https://clojars.org/net.clojars.cjsauer/joinery)
 
-A library to enable traversal of graph-like data sources using Clojure(Script)
+A library to enable traversal of in-memory graph-like data structures using Clojure(Script)
 map protocols.
 
 ## Install
