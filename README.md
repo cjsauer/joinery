@@ -5,8 +5,6 @@ map protocols.
 
 ## Quickstart
 
-`joinery` ships with built-in support for table-like databases, i.e. `{table {id entity}}`.
-
 ```clojure
 (require '[cjsauer.joinery :refer [joined-map]])
 
