@@ -5,6 +5,20 @@
 A library to enable traversal of graph-like data sources using Clojure(Script)
 map protocols.
 
+## Install
+
+Lein/Boot
+
+```
+[net.clojars.cjsauer/joinery "0.1.12"]
+```
+
+deps.edn
+
+```
+net.clojars.cjsauer/joinery {:mvn/version "0.1.12"}
+```
+
 ## Quickstart
 
 ```clojure
