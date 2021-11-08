@@ -10,13 +10,13 @@ map protocols.
 Lein/Boot
 
 ```
-[net.clojars.cjsauer/joinery "0.1.12"]
+[net.clojars.cjsauer/joinery "0.1.14"]
 ```
 
 deps.edn
 
 ```
-net.clojars.cjsauer/joinery {:mvn/version "0.1.12"}
+net.clojars.cjsauer/joinery {:mvn/version "0.1.14"}
 ```
 
 ## Quickstart
