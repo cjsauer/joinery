@@ -3,7 +3,7 @@
   (:require [clojure.tools.build.api :as b] ; for b/git-count-revs
             [org.corfield.build :as bb]))
 
-(def lib 'cjsauer/joinery)
+(def lib 'net.clojars.cjsauer/joinery)
 (def version (format "0.1.%s" (b/git-count-revs nil)))
 
 (defn test "Run the tests." [opts]
