@@ -33,9 +33,15 @@
        (without [_ k]
          (JoinedMap. joinery db (.without m k)))
 
+       clojure.lang.IMapIterable
+       (keyIterator [_]
+         (.iterator (keys m)))
+       (valIterator [_]
+         (.iterator (map #(table-join joinery db %) (vals m))))
+
        java.lang.Iterable
-       (iterator [_]
-         (.iterator m))
+       (iterator [this]
+         (.iterator (seq this)))
 
        clojure.lang.Associative
        (containsKey [_ k]

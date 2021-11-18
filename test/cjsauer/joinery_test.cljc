@@ -78,7 +78,8 @@
       (is (= #{"Calvin"
                [(joined-map #:person{:friends [[:person/id 1]], :name "Derek"})]
                (joined-map #:pet{:name "Malcolm", :owner [:person/id 1], :species :dog})}
-             (set (vals c))))))
+             (set (vals c))))
+      (is (every? joined-map? (reduce conj [] (vals jm))))))
 
   (testing "unwrap"
     (is (= db (unwrap jm))
@@ -113,4 +114,11 @@
     (is (= (seq jm)
            (reduce conj [] jm)))
     (is (= (seq jm)
-           (reduce-kv (fn [r k v] (conj r [k v])) [] jm)))))
+           (reduce-kv (fn [r k v] (conj r [k v])) [] jm))))
+
+  #?(:clj (testing "Java iterator"
+            (let [i (.iterator (get-in jm [:person/id 1]))
+                  _ (.next i)
+                  friends (val (.next i))]
+              (is (= (get-in jm [:person/id 2])
+                    (first friends)))))))
